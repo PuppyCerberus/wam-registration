@@ -1,9 +1,7 @@
 import sqlite3
 import telebot
 from Tokens import TOKEN_CERBERUS
-
 cerberus_bot = telebot.TeleBot(TOKEN_CERBERUS)
-
 # Connect to database
 conn = sqlite3.connect("PuppyAdventure_Game.db", check_same_thread=False)
 # Create a cursor object
@@ -28,7 +26,7 @@ def join_message(message):
     username = message.from_user.username
     double_sync_message = " You have had too much beer already"
     sync_message = "  You have successfully join Puppy Adventure🔥🔥🔥"
-    if chat_type != "private":
+    if chat_type != "private" and check_db(wam_input) != username:
         cerberus_bot.send_message(message.chat.id, "@" + username + sync_message)
         db_table_val(tg_username=username, wam=wam_input)
     else:
